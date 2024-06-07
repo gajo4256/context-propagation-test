@@ -7,6 +7,7 @@ import io.netty.channel.ChannelOutboundHandlerAdapter
 import io.netty.channel.ChannelPromise
 import io.netty.handler.codec.http.FullHttpRequest
 import io.netty.util.AttributeKey
+import org.slf4j.MDC
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
 import java.time.Instant
@@ -37,6 +38,8 @@ class MyOutboundHandler : ChannelDuplexHandler() {
     override fun channelRead(ctx: ChannelHandlerContext, msg: Any) {
         val requestId: String = ctx.channel().attr(AttributeKey.valueOf<String>("requestId")).get()
         println("${Thread.currentThread().name}, !!! ReqId from channel attribute: $requestId")
+
+        MDC.clear()
         super.channelRead(ctx, msg)
     }
 }

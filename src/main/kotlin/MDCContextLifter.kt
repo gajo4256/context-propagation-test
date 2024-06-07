@@ -8,6 +8,7 @@ object MDCContextLifter {
     fun addMDCToContext(): ContextView {
         var context = Context.empty()
         val requestId = MDC.get("requestId")
+        println("${Thread.currentThread().name}: setting MDC to $requestId")
         if (requestId != null) {
             context = context.put("requestId", requestId)
         }
