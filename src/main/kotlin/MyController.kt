@@ -25,7 +25,8 @@ class MyController(
                     .retrieve()
                     .bodyToMono(String::class.java)
 //            }
-            .contextWrite { ctx -> ctx.putAll(MDCContextLifter.addMDCToContext()) }
+        // @DUSKO it also works if this is commented out, since we set it also in MyOutboundHandler
+//            .contextWrite { ctx -> ctx.putAll(MDCContextLifter.addMDCToContext()) }
         return mono
     }
 

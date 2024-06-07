@@ -31,6 +31,7 @@ class MyOutboundHandler : ChannelDuplexHandler() {
             println("${Thread.currentThread().name}, Request ID in MyOutboundHandler subscribe: $it")
             ctx.channel().attr(AttributeKey.valueOf<String>("requestId")).set(it)
             ctx.write(msg, promise)
+            // telemetyrClient call would come here
         }
     }
 
