@@ -25,9 +25,11 @@ class MyOutboundHandler : ChannelDuplexHandler() {
             println("${Thread.currentThread().name}, Request ID in MyOutboundHandler deferred: $requestId")
 //            ctx.channel().attr(AttributeKey.valueOf<String>("requestId")).set(it)
             Mono.just(requestId!!)
-        }.contextWrite { context ->
+        }
+            .contextWrite { context ->
             context.putAll(MDCContextLifter.addMDCToContext())
-        }.subscribe {
+        }
+        .subscribe {
             println("${Thread.currentThread().name}, Request ID in MyOutboundHandler subscribe: $it")
             ctx.channel().attr(AttributeKey.valueOf<String>("requestId")).set(it)
             ctx.write(msg, promise)

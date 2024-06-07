@@ -1,0 +1,15 @@
+mdk:
+  service:
+    acronym: test
+
+infrastructure:
+  adapters:
+    outbound:
+      httpResponseTimeoutMillis: 5000
+      service:
+        vwac:
+          baseUri: temp
+          contentType: application/json
+          cacheControl: no-content
+          authorizationservice:
+            disabled: true # local and dev in BS
